@@ -43,9 +43,12 @@ const Dashboard = () => {
   //CTX store
 
   const [allChats] = React.useContext(CTX);
-  console.log(allChats);
+  const topics = Object.keys(allChats);
 
+  const [activeTopic, setActiveTopic] = useState(topics[0]);
   const [textValue, changeTextValue] = useState("");
+  console.log(allChats[activeTopic]);
+
   return (
     <div>
       <Paper className={classes.root}>
@@ -53,20 +56,24 @@ const Dashboard = () => {
           Chat App
         </Typography>
         <Typography variant="h5" component="h5">
-          Topic placeholder
+          {activeTopic}
         </Typography>
         <div className={classes.flex}>
           <div className={classes.topicsWindow}>
             <List>
-              {["topic"].map(topic => (
-                <ListItem key={topic} button>
+              {topics.map(topic => (
+                <ListItem
+                  onClick={() => setActiveTopic(topic)}
+                  key={topic}
+                  button
+                >
                   <ListItemText primary={topic} />
                 </ListItem>
               ))}
             </List>
           </div>
           <div className={classes.chatWindow}>
-            {[{ from: "user", msg: "hello" }].map((chat, i) => (
+            {allChats[activeTopic].map((chat, i) => (
               <div key={i} className={classes.flex}>
                 <Chip label={chat.from} className={classes.chip} />
                 <Typography component="p">{chat.msg}</Typography>
