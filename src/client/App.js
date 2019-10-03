@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import Dashboard from "./client/Dashboard";
+import Dashboard from "./Dashboardhboardd";
 import Store from "./client/Store";
 
 function App() {
